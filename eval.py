@@ -4,19 +4,27 @@ from dqn import DQN
 
 
 env = gym.make('CartPole-v1')
-obs = env.reset()
+
 obs_dim = env.observation_space.shape[0]
 act_dim = env.action_space.n
 dqn = DQN(obs_dim, act_dim)
 dqn.load_state_dict(torch.load('main_dqn.pth'))
 dqn.eval()
 
-for _ in range(1000):
+
+
+
+# run until episode ends
+episode_reward = 0
+done = False
+obs = env.reset()
+while True:
     env.render()
     action = torch.argmax(dqn(obs)).item()
-    _, _, done, _ = env.step(action)
-    if done:
-        print("Reset!")
-        env.reset()
+    obs, reward, done, info = env.step(action)
+    episode_reward += reward
 
-env.close()
+    if done:
+        print(f"Episode reward: {episode_reward}")
+        obs = env.reset()
+        episode_reward = 0
