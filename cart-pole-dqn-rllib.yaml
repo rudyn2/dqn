@@ -1,0 +1,12 @@
+env: CartPole-v1
+num_gpus: 1
+num_workers: 2
+stop:
+    episode_reward_mean: 420
+config:
+    # Works for both torch and tf.
+    env: CartPole-v1
+    framework: torch
+    model:
+        fcnet_hiddens: [128, 64]
+        fcnet_activation: relu
