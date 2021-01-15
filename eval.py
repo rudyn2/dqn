@@ -12,8 +12,6 @@ dqn.load_state_dict(torch.load('main_dqn.pth'))
 dqn.eval()
 
 
-
-
 # run until episode ends
 episode_reward = 0
 done = False

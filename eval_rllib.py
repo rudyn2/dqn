@@ -1,18 +1,17 @@
-from ray.rllib.agents.dqn import DQNTrainer
-import yaml
 import ray
 import gym
+from ray.rllib.agents import dqn, ppo
 
-
-with open('cart-pole-dqn-rllib.yaml', 'r') as f:
-    config = yaml.load(f)
 
 ray.init()
-checkpoint_path = 'results/DQN-420-stop/DQN_CartPole-v1_1_n_step=10_2021-01-14_15-23-53_ebwzqvn/checkpoint_67/checkpoint-67'
-agent = DQNTrainer(config=config['config'], env=config["env"])
+env = "CartPole-v1"
+algorithm = "PPO"
+checkpoint_path = 'results/PPO/checkpoint_91/checkpoint-91'
+config = dqn.DEFAULT_CONFIG.copy() if algorithm == "DQN" else ppo.DEFAULT_CONFIG.copy()
+agent = dqn.DQNTrainer(config, env=env) if algorithm == "DQN" else ppo.PPOTrainer(config, env=env)
 agent.restore(checkpoint_path)
 
-env = gym.make(config['env'])
+env = gym.make(env)
 
 # run until episode ends
 episode_reward = 0
