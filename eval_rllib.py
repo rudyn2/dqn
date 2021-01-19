@@ -4,7 +4,7 @@ from ray.rllib.agents import dqn, ppo
 
 
 ray.init()
-env = "CartPole-v1"
+env = "LunarLander-v2"
 algorithm = "PPO"
 checkpoint_path = 'results/PPO/checkpoint_91/checkpoint-91'
 config = dqn.DEFAULT_CONFIG.copy() if algorithm == "DQN" else ppo.DEFAULT_CONFIG.copy()

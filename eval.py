@@ -8,7 +8,7 @@ env = gym.make('CartPole-v1')
 obs_dim = env.observation_space.shape[0]
 act_dim = env.action_space.n
 dqn = DQN(obs_dim, act_dim)
-dqn.load_state_dict(torch.load('main_dqn.pth'))
+dqn.load_state_dict(torch.load('results/PPO/my_dqn_995.pth'))
 dqn.eval()
 
 
